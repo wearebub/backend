@@ -107,8 +107,8 @@ app.post('/create-checkout', async (req, res) => {
         },
       ],
       mode: 'subscription',
-      success_url: selectedProduct.successUrl + '?session_id={CHECKOUT_SESSION_ID}',
-      cancel_url: 'chrome-extension://YOUR_EXTENSION_ID/cancel.html',
+      success_url: req.body.successUrl || (selectedProduct.successUrl + '?session_id={CHECKOUT_SESSION_ID}'),
+      cancel_url: req.body.cancelUrl || 'chrome-extension://YOUR_EXTENSION_ID/cancel.html',
       metadata: {
         product: product,
         deviceId: deviceId || 'unknown'
